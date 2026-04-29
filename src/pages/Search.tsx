@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
+import { Book } from "../models/Books";
 import {
   searchBooks,
-  type Book,
   type SearchType,
 } from "../services/openLibraryService";
 import styles from "./Search.module.css";
