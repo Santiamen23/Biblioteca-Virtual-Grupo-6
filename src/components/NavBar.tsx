@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "./Navbar.module.css";
+import styles from "./NavBar.module.css";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -12,18 +12,34 @@ export default function Navbar() {
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        {/* Logo */}
         <Link href="/" className={styles.logo}>
           Biblioteca Inteligente
         </Link>
 
-        {/* Links */}
         <nav className={styles.nav}>
           <Link
             href="/"
             className={`${styles.link} ${isActive("/") ? styles.active : ""}`}
           >
             Inicio
+          </Link>
+
+          <Link
+            href="/buscar"
+            className={`${styles.link} ${
+              isActive("/buscar") ? styles.active : ""
+            }`}
+          >
+            Buscar
+          </Link>
+
+          <Link
+            href="/favoritos"
+            className={`${styles.link} ${
+              isActive("/favoritos") ? styles.active : ""
+            }`}
+          >
+            Favoritos
           </Link>
 
           <Link
