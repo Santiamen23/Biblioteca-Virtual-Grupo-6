@@ -1,5 +1,6 @@
-import Search from "../pages/Search";
+import Home from "../pages/Home";
 
-export default function Home() {
-  return <Search />;
+
+export default function Page() {
+  return <Home />;
 }
