@@ -31,13 +31,12 @@ export default function BookCard({ book }: BookCardProps) {
                     <span>Ediciones: {book.editionCount}</span>
                 </div>
                 <div className={styles.actions}>
-                    <button type = "button" className={styles.detailsButton}>
+                    <button type="button" className={styles.detailButton}>
                         Ver detalles
                     </button>
-
-                    <button type = "button" className={styles.addButton}>
+                    <button type="button" className={styles.favoriteButton}>
                         Agregar
-                    </button>    
+                    </button>                    
                 </div>
             </div>
        </article>    
