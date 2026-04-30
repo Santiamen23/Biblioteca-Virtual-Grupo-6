@@ -1,9 +1,5 @@
-import type { Book } from "../models/Books";
+import type { BookCardProps } from "../models/book";
 import styles from "./BookCard.module.css";
-
-type BookCardProps = {
-  book: Book;
-};
 
 const getCoverUrl = (coverId: number | null) =>
     coverId
@@ -12,14 +8,14 @@ const getCoverUrl = (coverId: number | null) =>
 
 export default function BookCard({ book }: BookCardProps) {
     return (
-        <article className="{styles.card}">
+        <article className={styles.card}>
             <img
                 src={getCoverUrl(book.coverId)}
                 alt={book.title}
                 className={styles.cover}
             />
 
-            <div className="styles.body">
+            <div className={styles.body}>
                 <h3 className={styles.title}>{book.title}</h3>
                 <p className={styles.author}>
                     {book.authors.length > 0 
