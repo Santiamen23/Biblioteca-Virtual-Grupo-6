@@ -66,10 +66,7 @@ export default function Home() {
           <div className={styles.sectionHeader}>
             <div>
               <h2 className={styles.sectionTitle}>Libros recomendados</h2>
-              <p className={styles.sectionDescription}>
-                Resultados iniciales para la búsqueda:{" "}
-                <strong>{DEFAULT_QUERY}</strong>
-              </p>
+              
             </div>
 
             <span className={styles.count}>{books.length} libro(s)</span>
