@@ -1,13 +1,14 @@
 .navbar {
-  width: 100%;
-  border-bottom: 1px solid #e2e8f0;
-  background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
 }
 
 .container {
+  position: relative;
   max-width: 72rem;
   margin: 0 auto;
   padding: 0.75rem 1rem;
@@ -18,9 +19,9 @@
 }
 
 .logo {
-  font-size: 1rem;
-  font-weight: 600;
   color: #0284c7;
+  font-size: 1rem;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -28,24 +29,101 @@
   color: #0369a1;
 }
 
+.menuButton {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.menuButton span {
+  width: 1.25rem;
+  height: 2px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: #0f172a;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 .nav {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 1rem;
+  right: 1rem;
+
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1);
+}
+
+.open {
   display: flex;
-  gap: 1.25rem;
 }
 
 .link {
-  font-size: 0.875rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
   color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
   text-decoration: none;
-  position: relative;
-  transition: color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .link:hover {
+  background: #f1f5f9;
   color: #0284c7;
 }
 
 .active {
+  background: #f0f9ff;
   color: #0284c7;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .link {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .link:hover {
+    background: transparent;
+  }
+
+  .active {
+    background: transparent;
+  }
 }
