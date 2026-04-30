@@ -1,4 +1,4 @@
-import type { SearchType } from "./search";
+import type { SearchType } from "@/models/search";
 
 export type OpenLibraryDoc = {
   key?: string;

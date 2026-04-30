@@ -1,7 +1,7 @@
 import {
   LANGUAGE_OPTIONS,
   type FilterPanelProps,
-} from "../models/search";
+} from "@/models/search";
 import styles from "./FilterPanel.module.css";
 
 export default function FilterPanel({

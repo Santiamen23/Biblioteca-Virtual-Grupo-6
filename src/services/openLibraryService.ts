@@ -1,9 +1,9 @@
-import type { Book } from "../models/book";
+import type { Book } from "@/models/book";
 import type {
   OpenLibraryDoc,
   OpenLibraryResponse,
   SearchBooksParams,
-} from "../models/open-library";
+} from "@/models/open-library";
 
 const BASE_URL = "https://openlibrary.org/search.json";
 const COVERS_BASE_URL = "https://covers.openlibrary.org/b/id";

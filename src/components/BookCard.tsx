@@ -1,5 +1,5 @@
-import type { BookCardProps } from "../models/book";
-import { getCoverUrl } from "../services/openLibraryService";
+import type { BookCardProps } from "@/models/book";
+import { getCoverUrl } from "@/services/openLibraryService";
 import styles from "./BookCard.module.css";
 
 export default function BookCard({ book }: BookCardProps) {

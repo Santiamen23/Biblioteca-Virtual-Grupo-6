@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FilterPanel from "../components/FilterPanel";
-import SearchBar from "../components/SearchBar";
-import BookCard from "../components/BookCard";
-import type { Book } from "../models/book";
-import type { Filters, SearchType } from "../models/search";
+import FilterPanel from "@/components/FilterPanel";
+import SearchBar from "@/components/SearchBar";
+import BookCard from "@/components/BookCard";
+import type { Book } from "@/models/book";
+import type { Filters, SearchType } from "@/models/search";
 import {
   getInitialSearchBooks,
   searchBooks,
-} from "../services/openLibraryService";
+} from "@/services/openLibraryService";
 import styles from "./Search.module.css";
 
 const initialFilters: Filters = {
