@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import BookCard from "../components/BookCard";
-import ErrorMessage from "../components/ErrorMessage";
-import Loading from "../components/Loading";
-import type { Book } from "../models/book";
-import { searchBooks } from "../services/openLibraryService";
+import BookCard from "@/components/BookCard";
+import ErrorMessage from "@/components/ErrorMessage";
+import Loading from "@/components/Loading";
+import type { Book } from "@/models/book";
+import { getHomeBooks } from "@/services/openLibraryService";
 import styles from "./Home.module.css";
-
-const DEFAULT_QUERY = "programming languages";
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -23,11 +21,7 @@ export default function Home() {
         setLoading(true);
         setError("");
 
-        const results = await searchBooks({
-          type: "q",
-          query: DEFAULT_QUERY,
-          limit: 12,
-        });
+        const results = await getHomeBooks(12);
 
         setBooks(results);
       } catch (homeError) {

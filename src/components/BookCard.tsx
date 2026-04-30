@@ -1,10 +1,6 @@
-import type { BookCardProps } from "../models/book";
+import type { BookCardProps } from "@/models/book";
+import { getCoverUrl } from "@/services/openLibraryService";
 import styles from "./BookCard.module.css";
-
-const getCoverUrl = (coverId: number | null) =>
-    coverId
-        ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
-        : "https://placehold.co/280x420/e5e7eb/6b7280?text=No+img";
 
 export default function BookCard({ book }: BookCardProps) {
     return (

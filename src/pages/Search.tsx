@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FilterPanel from "../components/FilterPanel";
-import SearchBar from "../components/SearchBar";
-import BookCard from "../components/BookCard";
-import type { Book } from "../models/book";
-import type { Filters, SearchType } from "../models/search";
-import { searchBooks } from "../services/openLibraryService";
+import FilterPanel from "@/components/FilterPanel";
+import SearchBar from "@/components/SearchBar";
+import BookCard from "@/components/BookCard";
+import type { Book } from "@/models/book";
+import type { Filters, SearchType } from "@/models/search";
+import {
+  getInitialSearchBooks,
+  searchBooks,
+} from "@/services/openLibraryService";
 import styles from "./Search.module.css";
 
 const initialFilters: Filters = {
@@ -17,7 +20,7 @@ const initialFilters: Filters = {
 };
 
 export default function Search() {
-  const [searchType, setSearchType] = useState<SearchType>("q");
+  const [searchType, setSearchType] = useState<SearchType>("title");
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
   const [filters, setFilters] = useState(initialFilters);
@@ -27,6 +30,28 @@ export default function Search() {
 
   useEffect(() => {
     document.title = "Biblioteca Inteligente | Búsqueda avanzada";
+
+    const loadInitialBooks = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const results = await getInitialSearchBooks(24);
+
+        setBooks(results);
+      } catch (initialError) {
+        setBooks([]);
+        setError(
+          initialError instanceof Error
+            ? initialError.message
+            : "Ocurrió un error al cargar los libros.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadInitialBooks();
   }, []);
 
   const normalizedLanguage = filters.language.trim().toLowerCase();
@@ -141,9 +166,9 @@ export default function Search() {
             </div>
           )}
 
-          {!loading && !error && !hasSearched && (
+          {!loading && !error && !hasSearched && filteredBooks.length === 0 && (
             <div className={styles.messageBox}>
-              Realiza una búsqueda para ver resultados.
+              No hay libros disponibles para mostrar.
             </div>
           )}
 

@@ -1,4 +1,4 @@
-import type { ErrorMessageProps } from "../models/ui";
+import type { ErrorMessageProps } from "@/models/ui";
 import styles from "./ErrorMessage.module.css";
 
 export default function ErrorMessage({ message }: ErrorMessageProps) {

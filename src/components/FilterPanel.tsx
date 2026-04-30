@@ -1,4 +1,7 @@
-import type { FilterPanelProps } from "../models/search";
+import {
+  LANGUAGE_OPTIONS,
+  type FilterPanelProps,
+} from "@/models/search";
 import styles from "./FilterPanel.module.css";
 
 export default function FilterPanel({
@@ -48,14 +51,19 @@ export default function FilterPanel({
           <label htmlFor="language" className={styles.label}>
             Idioma
           </label>
-          <input
+          <select
             id="language"
-            type="text"
             value={filters.language}
             onChange={(event) => onChange("language", event.target.value)}
             className={styles.input}
-            placeholder="eng"
-          />
+          >
+            <option value="">Todos los idiomas</option>
+            {LANGUAGE_OPTIONS.map((language) => (
+              <option key={language.code} value={language.code}>
+               {language.label}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className={styles.field}>
