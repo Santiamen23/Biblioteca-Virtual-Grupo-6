@@ -8,7 +8,7 @@ type BookCardProps = {
 const getCoverUrl = (coverId: number | null) =>
     coverId
         ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
-        : "https://placehold.co/280x420/e5e7eb/6b7280?text=No+Cover";
+        : "https://placehold.co/280x420/e5e7eb/6b7280?text=No+img";
 
 export default function BookCard({ book }: BookCardProps) {
     return (
