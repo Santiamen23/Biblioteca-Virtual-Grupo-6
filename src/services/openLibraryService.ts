@@ -1,3 +1,5 @@
+import { Book } from "../models/Books";
+
 const BASE_URL = "https://openlibrary.org/search.json";
 
 type OpenLibraryDoc = {
@@ -17,18 +19,6 @@ type OpenLibraryResponse = {
 };
 
 export type SearchType = "title" | "author" | "q";
-
-export type Book = {
-  id: string;
-  title: string;
-  authors: string[];
-  firstPublishYear: number | null;
-  languages: string[];
-  languageNames: string[];
-  coverId: number | null;
-  editionCount: number;
-  publisher: string;
-};
 
 type SearchBooksParams = {
   type?: SearchType;
