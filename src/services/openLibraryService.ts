@@ -1,30 +1,13 @@
-import { Book } from "../models/Books";
+import type { Book } from "../models/book";
+import type {
+  OpenLibraryDoc,
+  OpenLibraryResponse,
+  SearchBooksParams,
+} from "../models/open-library";
+import type { SearchType } from "../models/search";
 
 const BASE_URL = "https://openlibrary.org/search.json";
-
-type OpenLibraryDoc = {
-  key?: string;
-  title?: string;
-  author_name?: string[];
-  first_publish_year?: number;
-  language?: string[];
-  language_name?: string[];
-  cover_i?: number;
-  edition_count?: number;
-  publisher?: string[];
-};
-
-type OpenLibraryResponse = {
-  docs?: OpenLibraryDoc[];
-};
-
-export type SearchType = "title" | "author" | "q";
-
-type SearchBooksParams = {
-  type?: SearchType;
-  query?: string;
-  limit?: number;
-};
+export type { SearchType } from "../models/search";
 
 const normalizeBooks = (docs: OpenLibraryDoc[] = []): Book[] =>
   docs.map((book, index) => ({

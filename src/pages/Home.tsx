@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import ErrorMessage from "../components/ErrorMessage";
 import Loading from "../components/Loading";
-import type { Book } from "../models/Books";
+import type { Book } from "../models/book";
 import { searchBooks } from "../services/openLibraryService";
 import styles from "./Home.module.css";
 

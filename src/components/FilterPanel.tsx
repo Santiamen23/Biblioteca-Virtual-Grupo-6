@@ -1,17 +1,5 @@
+import type { FilterPanelProps } from "../models/search";
 import styles from "./FilterPanel.module.css";
-
-type Filters = {
-  minYear: string;
-  maxYear: string;
-  language: string;
-  author: string;
-};
-
-type FilterPanelProps = {
-  filters: Filters;
-  onChange: (field: keyof Filters, value: string) => void;
-  onReset: () => void;
-};
 
 export default function FilterPanel({
   filters,

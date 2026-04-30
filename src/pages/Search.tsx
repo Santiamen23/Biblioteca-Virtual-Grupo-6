@@ -4,19 +4,10 @@ import { useEffect, useState } from "react";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
 import BookCard from "../components/BookCard";
-import { Book } from "../models/Books";
-import {
-  searchBooks,
-  type SearchType,
-} from "../services/openLibraryService";
+import type { Book } from "../models/book";
+import type { Filters, SearchType } from "../models/search";
+import { searchBooks } from "../services/openLibraryService";
 import styles from "./Search.module.css";
-
-type Filters = {
-  minYear: string;
-  maxYear: string;
-  language: string;
-  author: string;
-};
 
 const initialFilters: Filters = {
   minYear: "",
@@ -24,11 +15,6 @@ const initialFilters: Filters = {
   language: "",
   author: "",
 };
-
-const getCoverUrl = (coverId: number | null) =>
-  coverId
-    ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
-    : "https://placehold.co/280x420/e5e7eb/6b7280?text=No+Cover";
 
 export default function Search() {
   const [searchType, setSearchType] = useState<SearchType>("q");

@@ -9,3 +9,7 @@ export type Book = {
   editionCount: number;
   publisher: string;
 };
+
+export type BookCardProps = {
+  book: Book;
+};
