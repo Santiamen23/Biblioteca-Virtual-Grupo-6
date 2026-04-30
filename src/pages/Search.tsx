@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import FilterPanel from "../components/FilterPanel";
 import SearchBar from "../components/SearchBar";
+import BookCard from "../components/BookCard";
 import { Book } from "../models/Books";
 import {
   searchBooks,
@@ -163,37 +164,7 @@ export default function Search() {
           {!loading && !error && filteredBooks.length > 0 && (
             <div className={styles.grid}>
               {filteredBooks.map((book) => (
-                <article key={book.id} className={styles.card}>
-                  <img
-                    src={getCoverUrl(book.coverId)}
-                    alt={book.title}
-                    className={styles.cover}
-                  />
-
-                  <div className={styles.cardBody}>
-                    <h3 className={styles.cardTitle}>{book.title}</h3>
-                    <p className={styles.cardText}>
-                      {book.authors.length > 0
-                        ? book.authors.join(", ")
-                        : "Autor no disponible"}
-                    </p>
-                    <p className={styles.cardMeta}>
-                      Año: {book.firstPublishYear || "No disponible"}
-                    </p>
-                    <p className={styles.cardMeta}>
-                      Idioma:{" "}
-                      {book.languageNames[0] ||
-                        book.languages[0] ||
-                        "No disponible"}
-                    </p>
-                    <p className={styles.cardMeta}>
-                      Editorial: {book.publisher}
-                    </p>
-                    <p className={styles.cardMeta}>
-                      Ediciones: {book.editionCount}
-                    </p>
-                  </div>
-                </article>
+                <BookCard key={book.id} book={book} />
               ))}
             </div>
           )}

@@ -8,7 +8,7 @@ import type { Book } from "../models/Books";
 import { searchBooks } from "../services/openLibraryService";
 import styles from "./Home.module.css";
 
-const DEFAULT_QUERY = "programming";
+const DEFAULT_QUERY = "programming languages";
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
