@@ -4,7 +4,7 @@ import Link from "next/link";
 import BookCard from "@/components/BookCard";
 import { useFavorites } from "@/hooks/useFavorites";
 import type { Book } from "@/models/book";
-import styles from "./Favorites.module.css";
+import styles from "./Favorites.module.scss";
 
 export default function Favorites() {
   const { favorites } = useFavorites();

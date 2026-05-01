@@ -1,6 +1,8 @@
+@use "../styles/variables" as *;
+
 .page {
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: $page-padding;
   background: var(--surface-subtle);
   color: var(--text-primary);
 }
@@ -10,14 +12,14 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  max-width: 72rem;
+  max-width: $container-max;
   margin: 0 auto;
 }
 
 .card {
-  padding: 1.5rem;
+  padding: $section-padding;
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: $radius-lg;
   background: var(--surface);
   box-shadow: var(--shadow-sm);
 }
@@ -27,7 +29,7 @@
   width: fit-content;
   padding: 0.25rem 0.75rem;
   border: 1px solid var(--border-accent);
-  border-radius: 9999px;
+  border-radius: $radius-full;
   background: var(--surface-accent);
   color: var(--brand-strong);
   font-size: 0.75rem;
@@ -70,14 +72,14 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1rem;
-}
 
-.tags span {
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--border-accent);
-  border-radius: 9999px;
-  background: var(--surface-accent);
-  color: var(--brand-strong);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  span {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border-accent);
+    border-radius: $radius-full;
+    background: var(--surface-accent);
+    color: var(--brand-strong);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
 }

@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import BookDetailCard from "@/components/BookDetailCard";
+import ErrorMessage from "@/components/ErrorMessage";
 import type { BookDetail as BookDetailModel } from "@/models/book";
 import { getBookWorkId } from "@/models/book";
 import { getBookDetail } from "@/services/openLibraryService";
-import styles from "./BookDetail.module.css";
+import styles from "./BookDetail.module.scss";
 
 export default function BookDetail() {
   const params = useParams<{ workId: string }>();
@@ -43,8 +44,8 @@ export default function BookDetail() {
 
   if (error) {
     return (
-      <div className={styles.error}>
-        <p>{error}</p>
+      <div className={styles.errorState}>
+        <ErrorMessage message={error} />
         <button onClick={() => router.back()} className={styles.backBtn}>
           Volver
         </button>
@@ -54,8 +55,8 @@ export default function BookDetail() {
 
   if (!book) {
     return (
-      <div className={styles.error}>
-        <p>Libro no encontrado</p>
+      <div className={styles.errorState}>
+        <ErrorMessage message="Libro no encontrado" />
       </div>
     );
   }

@@ -2,12 +2,13 @@ import {
   LANGUAGE_OPTIONS,
   type FilterPanelProps,
 } from "@/models/search";
-import styles from "./FilterPanel.module.css";
+import styles from "./FilterPanel.module.scss";
 
 export default function FilterPanel({
   filters,
   onChange,
   onReset,
+  errors,
 }: FilterPanelProps) {
   return (
     <section className={styles.panel}>
@@ -28,9 +29,16 @@ export default function FilterPanel({
             type="number"
             value={filters.minYear}
             onChange={(event) => onChange("minYear", event.target.value)}
-            className={styles.input}
+            className={`${styles.input} ${errors?.minYear ? styles.inputError : ""}`}
             placeholder="1900"
+            aria-invalid={Boolean(errors?.minYear)}
+            aria-describedby={errors?.minYear ? "minYear-error" : undefined}
           />
+          {errors?.minYear && (
+            <p id="minYear-error" className={styles.errorText}>
+              {errors.minYear}
+            </p>
+          )}
         </div>
 
         <div className={styles.field}>
@@ -42,9 +50,16 @@ export default function FilterPanel({
             type="number"
             value={filters.maxYear}
             onChange={(event) => onChange("maxYear", event.target.value)}
-            className={styles.input}
+            className={`${styles.input} ${errors?.maxYear ? styles.inputError : ""}`}
             placeholder="2024"
+            aria-invalid={Boolean(errors?.maxYear)}
+            aria-describedby={errors?.maxYear ? "maxYear-error" : undefined}
           />
+          {errors?.maxYear && (
+            <p id="maxYear-error" className={styles.errorText}>
+              {errors.maxYear}
+            </p>
+          )}
         </div>
 
         <div className={styles.field}>

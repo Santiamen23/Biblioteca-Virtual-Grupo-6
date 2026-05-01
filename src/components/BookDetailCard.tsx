@@ -3,7 +3,7 @@
 import { useFavorites } from "@/hooks/useFavorites";
 import type { Book, BookDetail } from "@/models/book";
 import { getCoverUrl } from "@/services/openLibraryService";
-import styles from "./BookDetailCard.module.css";
+import styles from "./BookDetailCard.module.scss";
 
 type BookDetailCardProps = {
   book: BookDetail;

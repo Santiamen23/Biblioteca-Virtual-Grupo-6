@@ -1,7 +1,9 @@
+@use "../styles/variables" as *;
+
 .errorBox {
   padding: 1rem;
   border: 1px solid var(--danger-border);
-  border-radius: 0.5rem;
+  border-radius: $radius-md;
   background: var(--danger-bg);
   color: var(--danger);
   font-size: 0.875rem;

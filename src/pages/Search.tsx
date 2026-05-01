@@ -4,14 +4,26 @@ import { useEffect, useState } from "react";
 import FilterPanel from "@/components/FilterPanel";
 import SearchBar from "@/components/SearchBar";
 import BookCard from "@/components/BookCard";
+import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
+import Pagination from "@/components/Pagination";
 import type { Book } from "@/models/book";
 import type { Filters, SearchType } from "@/models/search";
 import {
   getInitialSearchBooks,
   searchBooks,
 } from "@/services/openLibraryService";
-import styles from "./Search.module.css";
+import {
+  clampPage,
+  getTotalPages,
+  paginateItems,
+  SEARCH_RESULTS_PER_PAGE,
+} from "@/utils/pagination";
+import {
+  validateSearchFilters,
+  validateSearchQuery,
+} from "@/utils/validation";
+import styles from "./Search.module.scss";
 
 const initialFilters: Filters = {
   minYear: "",
@@ -28,6 +40,8 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     document.title = "Biblioteca Inteligente | Búsqueda avanzada";
@@ -59,6 +73,11 @@ export default function Search() {
   const normalizedAuthor = filters.author.trim().toLowerCase();
   const minYear = filters.minYear ? Number(filters.minYear) : null;
   const maxYear = filters.maxYear ? Number(filters.maxYear) : null;
+  const queryError = submitAttempted
+    ? validateSearchQuery(query)
+    : undefined;
+  const filterErrors = validateSearchFilters(filters);
+  const hasFilterErrors = Boolean(filterErrors.minYear || filterErrors.maxYear);
 
   const filteredBooks = books.filter((book) => {
     const matchesMinYear =
@@ -86,28 +105,54 @@ export default function Search() {
     );
   });
 
+  const totalPages = getTotalPages(
+    filteredBooks.length,
+    SEARCH_RESULTS_PER_PAGE,
+  );
+  const safeCurrentPage = clampPage(currentPage, totalPages);
+  const paginatedBooks = paginateItems(
+    filteredBooks,
+    safeCurrentPage,
+    SEARCH_RESULTS_PER_PAGE,
+  );
+
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setHasSearched(true);
-    setLoading(true);
+    setSubmitAttempted(true);
     setError("");
+
+    const nextQueryError = validateSearchQuery(query);
+    const nextFilterErrors = validateSearchFilters(filters);
+
+    if (
+      nextQueryError ||
+      nextFilterErrors.minYear ||
+      nextFilterErrors.maxYear
+    ) {
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const results = await searchBooks({ type: searchType, query });
       setBooks(results);
+      setCurrentPage(1);
     } catch (searchError) {
       setBooks([]);
-      setError(
-        searchError instanceof Error
-          ? searchError.message
-          : "Ocurrió un error al buscar libros.",
-      );
+        setError(
+          searchError instanceof Error
+            ? searchError.message
+            : "Ocurrió un error al buscar libros.",
+        );
     } finally {
       setLoading(false);
     }
   };
 
   const handleFilterChange = (field: keyof Filters, value: string) => {
+    setCurrentPage(1);
     setFilters((currentFilters) => ({
       ...currentFilters,
       [field]: value,
@@ -115,6 +160,7 @@ export default function Search() {
   };
 
   const handleResetFilters = () => {
+    setCurrentPage(1);
     setFilters(initialFilters);
   };
 
@@ -137,12 +183,14 @@ export default function Search() {
           onQueryChange={setQuery}
           onSubmit={handleSearch}
           disabled={loading}
+          queryError={queryError}
         />
 
         <FilterPanel
           filters={filters}
           onChange={handleFilterChange}
           onReset={handleResetFilters}
+          errors={filterErrors}
         />
 
         <section className={styles.resultsSection}>
@@ -155,28 +203,46 @@ export default function Search() {
 
           {loading && <Loading />}
 
-          {!loading && error && (
-            <div className={styles.errorBox}>{error}</div>
+          {!loading && error && <ErrorMessage message={error} />}
+
+          {!loading && !error && hasFilterErrors && (
+            <ErrorMessage message={filterErrors.minYear || filterErrors.maxYear || ""} />
           )}
 
-          {!loading && !error && hasSearched && filteredBooks.length === 0 && (
+          {!loading &&
+            !error &&
+            !hasFilterErrors &&
+            hasSearched &&
+            filteredBooks.length === 0 && (
             <div className={styles.messageBox}>
               No se encontraron libros con esos criterios.
             </div>
-          )}
+            )}
 
-          {!loading && !error && !hasSearched && filteredBooks.length === 0 && (
+          {!loading &&
+            !error &&
+            !hasFilterErrors &&
+            !hasSearched &&
+            filteredBooks.length === 0 && (
             <div className={styles.messageBox}>
               No hay libros disponibles para mostrar.
             </div>
-          )}
+            )}
 
-          {!loading && !error && filteredBooks.length > 0 && (
-            <div className={styles.grid}>
-              {filteredBooks.map((book) => (
+          {!loading && !error && !hasFilterErrors && filteredBooks.length > 0 && (
+            <>
+              <div className={styles.grid}>
+                {paginatedBooks.map((book) => (
                 <BookCard key={book.id} book={book} />
               ))}
-            </div>
+              </div>
+
+              <Pagination
+                currentPage={safeCurrentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </>
           )}
         </section>
       </div>

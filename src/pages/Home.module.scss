@@ -1,6 +1,8 @@
+@use "../styles/variables" as *;
+
 .page {
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: $page-padding;
   background: var(--surface-subtle);
   color: var(--text-primary);
 }
@@ -10,15 +12,15 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  max-width: 72rem;
+  max-width: $container-max;
   margin: 0 auto;
 }
 
 .hero,
 .section {
-  padding: 1.5rem;
+  padding: $section-padding;
   border: 1px solid var(--border);
-  border-radius: 0.75rem;
+  border-radius: $radius-lg;
   background: var(--surface);
   box-shadow: var(--shadow-sm);
 }
@@ -28,7 +30,7 @@
   width: fit-content;
   padding: 0.25rem 0.75rem;
   border: 1px solid var(--border-accent);
-  border-radius: 9999px;
+  border-radius: $radius-full;
   background: var(--surface-accent);
   color: var(--brand-strong);
   font-size: 0.75rem;
@@ -60,6 +62,12 @@
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
+
+  @media (min-width: $bp-sm) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .sectionTitle {
@@ -82,7 +90,7 @@
 .emptyState {
   padding: 2.5rem 1rem;
   border: 1px dashed var(--border-strong);
-  border-radius: 0.5rem;
+  border-radius: $radius-md;
   background: var(--surface-muted);
   color: var(--text-soft);
   font-size: 0.875rem;
@@ -93,24 +101,12 @@
   display: grid;
   gap: 1.25rem;
   align-items: stretch;
-}
 
-@media (min-width: 640px) {
-  .sectionHeader {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .grid {
+  @media (min-width: $bp-sm) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
   }
-}
 
-@media (min-width: 1280px) {
-  .grid {
+  @media (min-width: $bp-xl) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    align-items: stretch;
   }
 }

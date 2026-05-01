@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
-import styles from "./NavBar.module.css";
+import styles from "./NavBar.module.scss";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -76,12 +76,12 @@ export default function Navbar() {
           </Link>
         </nav>
         <button
-            onClick={toggleDarkMode}
-            className={styles.darkToggle}
-            aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-          >
-            {isDark ? "☀️" : "🌙"}
-          </button>
+          onClick={toggleDarkMode}
+          className={styles.darkToggle}
+          aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+        >
+          {isDark ? "☀️" : "🌙"}
+        </button>
       </div>
     </header>
   );
