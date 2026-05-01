@@ -28,23 +28,37 @@ export default function Navbar({ initialTheme }: NavbarProps) {
           Biblioteca Inteligente
         </Link>
 
-        <button
-          type="button"
-          className={styles.menuButton}
-          onClick={() => setOpen((current) => !current)}
-          aria-label="Abrir menú de navegación"
-          aria-expanded={open}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={styles.actions}>
+          <button
+            onClick={toggleDarkMode}
+            className={styles.darkToggle}
+            aria-label={
+              isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+            }
+          >
+            {isDark ? "☀️" : "🌙"}
+          </button>
+
+          <button
+            type="button"
+            className={styles.menuButton}
+            onClick={() => setOpen((current) => !current)}
+            aria-label="Abrir menú de navegación"
+            aria-expanded={open}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
 
         <nav className={`${styles.nav} ${open ? styles.open : ""}`}>
           <Link
             href="/"
             onClick={closeMenu}
-            className={`${styles.link} ${isActive("/") ? styles.active : ""}`}
+            className={`${styles.link} ${
+              isActive("/") ? styles.active : ""
+            }`}
           >
             Inicio
           </Link>
@@ -79,13 +93,6 @@ export default function Navbar({ initialTheme }: NavbarProps) {
             Acerca
           </Link>
         </nav>
-        <button
-          onClick={toggleDarkMode}
-          className={styles.darkToggle}
-          aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-        >
-          {isDark ? "☀️" : "🌙"}
-        </button>
       </div>
     </header>
   );
