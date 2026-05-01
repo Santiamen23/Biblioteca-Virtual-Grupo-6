@@ -27,6 +27,14 @@
   min-height: 50vh;
 }
 
+.errorState {
+  display: grid;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
 .spinner {
   width: 3rem;
   height: 3rem;
@@ -40,11 +48,3 @@
   to { transform: rotate(360deg); }
 }
 
-.error {
-  text-align: center;
-  padding: 3rem;
-  color: var(--danger-strong);
-  background: var(--danger-bg);
-  border-radius: 0.5rem;
-  border: 1px solid var(--danger-border);
-}
