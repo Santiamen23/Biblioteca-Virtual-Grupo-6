@@ -15,8 +15,6 @@ export default function Pagination({
     return null;
   }
 
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
-
   return (
     <nav className={styles.pagination} aria-label="Paginación de resultados">
       <button
@@ -27,22 +25,9 @@ export default function Pagination({
       >
         Anterior
       </button>
-
-      <div className={styles.pages}>
-        {pages.map((page) => (
-          <button
-            key={page}
-            type="button"
-            className={`${styles.button} ${
-              page === currentPage ? styles.active : ""
-            }`}
-            onClick={() => onPageChange(page)}
-            aria-current={page === currentPage ? "page" : undefined}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
+      <span className={styles.status}>
+        Página {currentPage} de {totalPages}
+      </span>
 
       <button
         type="button"

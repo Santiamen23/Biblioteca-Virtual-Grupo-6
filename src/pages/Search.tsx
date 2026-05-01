@@ -51,7 +51,7 @@ export default function Search() {
         setLoading(true);
         setError("");
 
-        const results = await getInitialSearchBooks(24);
+        const results = await getInitialSearchBooks();
 
         setBooks(results);
       } catch (initialError) {
@@ -231,10 +231,16 @@ export default function Search() {
 
           {!loading && !error && !hasFilterErrors && filteredBooks.length > 0 && (
             <>
+              <Pagination
+                currentPage={safeCurrentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+
               <div className={styles.grid}>
                 {paginatedBooks.map((book) => (
-                <BookCard key={book.id} book={book} />
-              ))}
+                  <BookCard key={book.id} book={book} />
+                ))}
               </div>
 
               <Pagination

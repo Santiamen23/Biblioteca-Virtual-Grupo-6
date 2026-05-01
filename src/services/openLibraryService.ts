@@ -13,6 +13,7 @@ const DEFAULT_HOME_QUERY = "programming languages";
 const DEFAULT_SEARCH_QUERY = "library";
 const FALLBACK_COVER_URL =
   "https://placehold.co/280x420/e5e7eb/6b7280?text=No+img";
+const SEARCH_RESULTS_LIMIT = 200;
 
 const normalizeBooks = (docs: OpenLibraryDoc[] = []): Book[] =>
   docs.map((book, index) => ({
@@ -71,7 +72,7 @@ export async function getBookDetail(workId: string): Promise<BookDetail> {
 export async function searchBooks({
   type = "q",
   query = "",
-  limit = 24,
+  limit = SEARCH_RESULTS_LIMIT,
 }: SearchBooksParams = {}): Promise<Book[]> {
   const trimmedQuery = query.trim();
 
@@ -79,9 +80,7 @@ export async function searchBooks({
     return [];
   }
 
-  const params = new URLSearchParams({
-    limit: String(limit),
-  });
+  const params = new URLSearchParams();
 
   if (type === "title") {
     params.set("title", trimmedQuery);
@@ -90,6 +89,8 @@ export async function searchBooks({
   } else {
     params.set("q", trimmedQuery);
   }
+
+  params.set("limit", String(limit));
 
   const response = await fetch(`${BASE_URL}?${params.toString()}`);
 
@@ -110,11 +111,10 @@ export async function getHomeBooks(limit = 12): Promise<Book[]> {
   });
 }
 
-export async function getInitialSearchBooks(limit = 24): Promise<Book[]> {
+export async function getInitialSearchBooks(): Promise<Book[]> {
   return searchBooks({
     type: "title",
     query: DEFAULT_SEARCH_QUERY,
-    limit,
   });
 }
 

@@ -6,10 +6,14 @@ import { useState } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
 import styles from "./NavBar.module.scss";
 
-export default function Navbar() {
+type NavbarProps = {
+  initialTheme: "light" | "dark";
+};
+
+export default function Navbar({ initialTheme }: NavbarProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const { isDark, toggleDarkMode } = useDarkMode();
+  const { isDark, toggleDarkMode } = useDarkMode(initialTheme);
 
   const isActive = (path: string) => pathname === path;
 

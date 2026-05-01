@@ -5,14 +5,6 @@ import { useState, useEffect } from "react";
 const THEME_STORAGE_KEY = "theme";
 const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-function getStoredTheme() {
-  if (typeof window === "undefined") {
-    return "light";
-  }
-
-  return localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
-}
-
 function applyTheme(theme: "light" | "dark") {
   if (typeof document === "undefined") {
     return;
@@ -22,14 +14,8 @@ function applyTheme(theme: "light" | "dark") {
   document.documentElement.style.colorScheme = theme;
 }
 
-export function useDarkMode() {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof document !== "undefined") {
-      return document.documentElement.dataset.theme === "dark";
-    }
-
-    return getStoredTheme() === "dark";
-  });
+export function useDarkMode(initialTheme: "light" | "dark" = "light") {
+  const [isDark, setIsDark] = useState(initialTheme === "dark");
 
   useEffect(() => {
     const theme = isDark ? "dark" : "light";
