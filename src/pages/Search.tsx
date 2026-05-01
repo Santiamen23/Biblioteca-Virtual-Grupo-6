@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import FilterPanel from "@/components/FilterPanel";
 import SearchBar from "@/components/SearchBar";
 import BookCard from "@/components/BookCard";
+import Loading from "@/components/Loading";
 import type { Book } from "@/models/book";
 import type { Filters, SearchType } from "@/models/search";
 import {
@@ -152,9 +153,7 @@ export default function Search() {
             </span>
           </div>
 
-          {loading && (
-            <div className={styles.messageBox}>Cargando resultados...</div>
-          )}
+          {loading && <Loading />}
 
           {!loading && error && (
             <div className={styles.errorBox}>{error}</div>
