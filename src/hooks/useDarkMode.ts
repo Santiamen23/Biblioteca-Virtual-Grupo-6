@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 const THEME_STORAGE_KEY = "theme";
+const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 function getStoredTheme() {
   if (typeof window === "undefined") {
@@ -34,6 +35,7 @@ export function useDarkMode() {
     const theme = isDark ? "dark" : "light";
     applyTheme(theme);
     localStorage.setItem(THEME_STORAGE_KEY, theme);
+    document.cookie = `theme=${theme}; path=/; max-age=${THEME_COOKIE_MAX_AGE}; samesite=lax`;
   }, [isDark]);
 
   const toggleDarkMode = () => {
