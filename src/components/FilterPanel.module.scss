@@ -84,3 +84,13 @@
     box-shadow: 0 0 0 3px var(--focus-ring);
   }
 }
+
+.inputError {
+  border-color: var(--danger-border);
+  box-shadow: 0 0 0 3px rgb(185 28 28 / 0.12);
+}
+
+.errorText {
+  font-size: 0.8125rem;
+  color: var(--danger);
+}

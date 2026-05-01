@@ -90,15 +90,6 @@
   text-align: center;
 }
 
-.errorBox {
-  padding: 1rem;
-  border: 1px solid var(--danger-border);
-  border-radius: $radius-md;
-  background: var(--danger-bg);
-  color: var(--danger);
-  font-size: 0.875rem;
-}
-
 .grid {
   display: grid;
   gap: 1.25rem;

@@ -12,6 +12,10 @@ export type Filters = {
   author: string;
 };
 
+export type FilterValidationErrors = Partial<
+  Record<"minYear" | "maxYear", string>
+>;
+
 export const LANGUAGE_OPTIONS: LanguageOption[] = [
   { code: "afr", label: "Afrikáans" },
   { code: "alb", label: "Albanés" },
@@ -79,10 +83,12 @@ export type SearchBarProps = {
   onQueryChange: (value: string) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   disabled: boolean;
+  queryError?: string;
 };
 
 export type FilterPanelProps = {
   filters: Filters;
   onChange: (field: keyof Filters, value: string) => void;
   onReset: () => void;
+  errors?: FilterValidationErrors;
 };
