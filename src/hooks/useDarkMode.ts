@@ -2,38 +2,42 @@
 
 import { useState, useEffect } from "react";
 
-export function useDarkMode() {
-  const [isDark, setIsDark] = useState(false);
+function applyDarkMode(dark: boolean) {
+  const bg = dark ? "#0a0a0a" : "#ffffff";
+  const fg = dark ? "#ededed" : "#171717";
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "dark") {
-      setIsDark(true);
-      applyDarkMode(true);
-    }
-  }, []);
+  document.documentElement.style.setProperty("--background", bg);
+  document.documentElement.style.setProperty("--foreground", fg);
 
-  const applyDarkMode = (dark: boolean) => {
-    const bg = dark ? "#0a0a0a" : "#ffffff";
-    const fg = dark ? "#ededed" : "#171717";
+  if (dark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
 
-    document.documentElement.style.setProperty("--background", bg);
-    document.documentElement.style.setProperty("--foreground", fg);
+  document.body.style.backgroundColor = bg;
+  document.body.style.color = fg;
 
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-
-    document.body.style.backgroundColor = bg;
-    document.body.style.color = fg;
-
-    document.querySelectorAll("main, section, div.bg-white, [class*='bg-white']").forEach((el) => {
+  document
+    .querySelectorAll("main, section, div.bg-white, [class*='bg-white']")
+    .forEach((el) => {
       (el as HTMLElement).style.backgroundColor = dark ? "#0a0a0a" : "";
       (el as HTMLElement).style.color = dark ? "#ededed" : "";
     });
-  };
+}
+
+export function useDarkMode() {
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  useEffect(() => {
+    applyDarkMode(isDark);
+  }, [isDark]);
 
   const toggleDarkMode = () => {
     setIsDark((prev) => {
