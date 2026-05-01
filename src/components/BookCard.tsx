@@ -5,7 +5,7 @@ import type { BookCardProps } from "@/models/book";
 import { getBookWorkId } from "@/models/book";
 import { useFavorites } from "@/hooks/useFavorites";
 import { getCoverUrl } from "@/services/openLibraryService";
-import styles from "./BookCard.module.css";
+import styles from "./BookCard.module.scss";
 
 export default function BookCard({ book }: BookCardProps) {
   const { toggleFavorite, checkIsFavorite } = useFavorites();

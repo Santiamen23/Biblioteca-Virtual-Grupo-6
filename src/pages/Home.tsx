@@ -6,7 +6,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
 import type { Book } from "@/models/book";
 import { getHomeBooks } from "@/services/openLibraryService";
-import styles from "./Home.module.css";
+import styles from "./Home.module.scss";
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);

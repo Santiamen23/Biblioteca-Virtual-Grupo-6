@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
-import styles from "./NavBar.module.css";
+import styles from "./NavBar.module.scss";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { isDark, toggleDarkMode } = useDarkMode();
+
+  // 🔥 FIX hydration
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -75,13 +82,19 @@ export default function Navbar() {
             Acerca
           </Link>
         </nav>
-        <button
+
+        {/* 🔥 Evita hydration mismatch */}
+        {mounted && (
+          <button
             onClick={toggleDarkMode}
             className={styles.darkToggle}
-            aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            aria-label={
+              isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+            }
           >
             {isDark ? "☀️" : "🌙"}
           </button>
+        )}
       </div>
     </header>
   );

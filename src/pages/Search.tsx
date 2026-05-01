@@ -11,7 +11,7 @@ import {
   getInitialSearchBooks,
   searchBooks,
 } from "@/services/openLibraryService";
-import styles from "./Search.module.css";
+import styles from "./Search.module.scss";
 
 const initialFilters: Filters = {
   minYear: "",

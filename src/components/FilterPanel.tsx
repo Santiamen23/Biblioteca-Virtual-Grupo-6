@@ -2,7 +2,7 @@ import {
   LANGUAGE_OPTIONS,
   type FilterPanelProps,
 } from "@/models/search";
-import styles from "./FilterPanel.module.css";
+import styles from "./FilterPanel.module.scss";
 
 export default function FilterPanel({
   filters,

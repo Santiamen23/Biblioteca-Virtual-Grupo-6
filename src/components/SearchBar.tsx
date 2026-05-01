@@ -1,5 +1,5 @@
 import type { SearchBarProps } from "@/models/search";
-import styles from "./SearchBar.module.css";
+import styles from "./SearchBar.module.scss";
 
 export default function SearchBar({
                                       searchType,

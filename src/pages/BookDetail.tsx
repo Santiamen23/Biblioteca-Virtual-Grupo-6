@@ -6,7 +6,7 @@ import BookDetailCard from "@/components/BookDetailCard";
 import type { BookDetail as BookDetailModel } from "@/models/book";
 import { getBookWorkId } from "@/models/book";
 import { getBookDetail } from "@/services/openLibraryService";
-import styles from "./BookDetail.module.css";
+import styles from "./BookDetail.module.scss";
 
 export default function BookDetail() {
   const params = useParams<{ workId: string }>();
