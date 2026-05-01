@@ -1,36 +1,49 @@
+"use client";
+
+import Link from "next/link";
 import type { BookCardProps } from "@/models/book";
+import { getBookWorkId } from "@/models/book";
+import { useFavorites } from "@/hooks/useFavorites";
 import { getCoverUrl } from "@/services/openLibraryService";
 import styles from "./BookCard.module.css";
 
 export default function BookCard({ book }: BookCardProps) {
-    return (
-        <article className={styles.card}>
-            <img
-                src={getCoverUrl(book.coverId)}
-                alt={book.title}
-                className={styles.cover}
-            />
+  const { toggleFavorite, checkIsFavorite } = useFavorites();
+  const workId = getBookWorkId(book.id);
+  const isFavorite = checkIsFavorite(workId);
 
-            <div className={styles.body}>
-                <h3 className={styles.title}>{book.title}</h3>
-                <p className={styles.author}>
-                    {book.authors.length > 0 
-                    ? book.authors.join(", ") 
-                    : "Autor no disponible"}
-                </p>
-                <div className={styles.meta}>
-                    <span>Año: {book.firstPublishYear || "No disponible"}</span>
-                    <span>Ediciones: {book.editionCount}</span>
-                </div>
-                <div className={styles.actions}>
-                    <button type="button" className={styles.detailButton}>
-                        Ver detalles
-                    </button>
-                    <button type="button" className={styles.favoriteButton}>
-                        Agregar
-                    </button>                    
-                </div>
-            </div>
-       </article>    
-    );
+  return (
+    <article className={styles.card}>
+      <img
+        src={getCoverUrl(book.coverId)}
+        alt={book.title}
+        className={styles.cover}
+      />
+
+      <div className={styles.body}>
+        <h3 className={styles.title}>{book.title}</h3>
+        <p className={styles.author}>
+          {book.authors.length > 0
+            ? book.authors.join(", ")
+            : "Autor no disponible"}
+        </p>
+        <div className={styles.meta}>
+          <span>Año: {book.firstPublishYear || "No disponible"}</span>
+          <span>Ediciones: {book.editionCount}</span>
+        </div>
+        <div className={styles.actions}>
+          <Link href={`/libro/${workId}`} className={styles.detailButton}>
+            Ver detalles
+          </Link>
+          <button
+            type="button"
+            onClick={() => toggleFavorite(book)}
+            className={styles.favoriteButton}
+          >
+            {isFavorite ? "Quitar" : "Agregar"}
+          </button>
+        </div>
+      </div>
+    </article>
+  );
 }

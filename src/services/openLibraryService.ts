@@ -1,7 +1,9 @@
-import type { Book } from "@/models/book";
+import type { Book, BookDetail } from "@/models/book";
+import { getBookWorkId } from "@/models/book";
 import type {
   OpenLibraryDoc,
   OpenLibraryResponse,
+  OpenLibraryWorkResponse,
   SearchBooksParams,
 } from "@/models/open-library";
 
@@ -15,7 +17,7 @@ const FALLBACK_COVER_URL =
 const normalizeBooks = (docs: OpenLibraryDoc[] = []): Book[] =>
   docs.map((book, index) => ({
     id:
-      book.key ||
+      (book.key ? getBookWorkId(book.key) : undefined) ||
       `${book.title || "book"}-${book.first_publish_year || "unknown"}-${index}`,
     title: book.title || "Untitled",
     authors: book.author_name || [],
@@ -26,6 +28,45 @@ const normalizeBooks = (docs: OpenLibraryDoc[] = []): Book[] =>
     editionCount: book.edition_count || 0,
     publisher: book.publisher?.[0] || "Unknown publisher",
   }));
+
+async function getAuthorName(authorKey: string): Promise<string | null> {
+  const response = await fetch(`https://openlibrary.org${authorKey}.json`);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const data: { name?: string } = await response.json();
+  return data.name || null;
+}
+
+export async function getBookDetail(workId: string): Promise<BookDetail> {
+  const normalizedWorkId = getBookWorkId(workId);
+  const response = await fetch(
+    `https://openlibrary.org/works/${normalizedWorkId}.json`,
+  );
+
+  if (!response.ok) {
+    throw new Error("No se pudo obtener el detalle del libro.");
+  }
+
+  const data: OpenLibraryWorkResponse = await response.json();
+  const authorKeys = data.authors?.map((entry) => entry.author.key) || [];
+  const authorNames = await Promise.all(authorKeys.map(getAuthorName));
+
+  return {
+    id: normalizedWorkId,
+    title: data.title || "Sin título",
+    authors: authorNames.filter((author): author is string => Boolean(author)),
+    description:
+      typeof data.description === "string"
+        ? data.description
+        : data.description?.value || "",
+    firstPublishDate: data.first_publish_date || null,
+    subjects: data.subjects?.slice(0, 8) || [],
+    coverId: data.covers?.[0] || null,
+  };
+}
 
 export async function searchBooks({
   type = "q",

@@ -16,6 +16,19 @@ export type OpenLibraryResponse = {
   docs?: OpenLibraryDoc[];
 };
 
+export type OpenLibraryWorkResponse = {
+  title?: string;
+  description?: string | { value?: string };
+  first_publish_date?: string;
+  covers?: number[];
+  subjects?: string[];
+  authors?: Array<{
+    author: {
+      key: string;
+    };
+  }>;
+};
+
 export type SearchBooksParams = {
   type?: SearchType;
   query?: string;
