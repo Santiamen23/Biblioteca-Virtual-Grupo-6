@@ -2,10 +2,10 @@
   display: grid;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: #ffffff;
-  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .fieldGroup {
@@ -17,17 +17,17 @@
 .label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .select,
 .input {
   width: 100%;
   padding: 0.625rem 0.75rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-strong);
   border-radius: 0.375rem;
-  background: #ffffff;
-  color: #0f172a;
+  background: var(--surface);
+  color: var(--text-primary);
   font-size: 0.875rem;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease,
@@ -36,8 +36,8 @@
 
 .select:focus,
 .input:focus {
-  border-color: #0ea5e9;
-  box-shadow: 0 0 0 3px #e0f2fe;
+  border-color: var(--brand-strong);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .select:disabled,
@@ -48,29 +48,29 @@
 
 .select:disabled,
 .input:disabled {
-  background: #f1f5f9;
+  background: var(--surface-subtle);
 }
 
 .button {
   height: 2.5rem;
   padding: 0 1rem;
-  border: 1px solid #0284c7;
+  border: 1px solid var(--brand);
   border-radius: 0.375rem;
-  background: #0284c7;
-  color: #ffffff;
+  background: var(--brand);
+  color: var(--brand-contrast);
   font-size: 0.875rem;
   font-weight: 500;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .button:hover:not(:disabled) {
-  border-color: #0369a1;
-  background: #0369a1;
+  border-color: var(--brand-strong);
+  background: var(--brand-strong);
 }
 
 .button:disabled {
-  border-color: #cbd5e1;
-  background: #cbd5e1;
+  border-color: var(--border-strong);
+  background: var(--border-strong);
 }
 
 @media (min-width: 768px) {

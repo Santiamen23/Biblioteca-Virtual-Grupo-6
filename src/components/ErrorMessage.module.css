@@ -1,8 +1,8 @@
 .errorBox {
   padding: 1rem;
-  border: 1px solid #fecaca;
+  border: 1px solid var(--danger-border);
   border-radius: 0.5rem;
-  background: #fef2f2;
-  color: #b91c1c;
+  background: var(--danger-bg);
+  color: var(--danger);
   font-size: 0.875rem;
 }

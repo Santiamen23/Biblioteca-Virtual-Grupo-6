@@ -2,7 +2,35 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-subtle: #f1f5f9;
+  --surface-accent: #f1f5f9;
+  --surface-hover: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-accent: #d1d5db;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-soft: #475569;
+  --text-muted: #64748b;
+  --brand: #4b5563;
+  --brand-strong: #374151;
+  --brand-contrast: #ffffff;
+  --tag-bg: #e5e7eb;
+  --tag-text: #374151;
+  --focus-ring: rgb(107 114 128 / 0.2);
+  --danger: #b91c1c;
+  --danger-strong: #dc2626;
+  --danger-bg: #fef2f2;
+  --danger-bg-hover: #fee2e2;
+  --danger-border: #fecaca;
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 6px 12px rgb(15 23 42 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.1);
+  --skeleton-base: #e2e8f0;
+  --skeleton-highlight: #f8fafc;
 }
 
 @theme inline {
@@ -12,15 +40,51 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #020617;
+  --foreground: #e2e8f0;
+  --surface: #0f172a;
+  --surface-muted: #111827;
+  --surface-subtle: #1e293b;
+  --surface-accent: #1f2937;
+  --surface-hover: #1e293b;
+  --border: #334155;
+  --border-strong: #475569;
+  --border-accent: #4b5563;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-soft: #94a3b8;
+  --text-muted: #94a3b8;
+  --brand: #d1d5db;
+  --brand-strong: #f3f4f6;
+  --brand-contrast: #111827;
+  --tag-bg: #374151;
+  --tag-text: #f3f4f6;
+  --focus-ring: rgb(209 213 219 / 0.2);
+  --danger: #fecaca;
+  --danger-strong: #fca5a5;
+  --danger-bg: rgb(127 29 29 / 0.2);
+  --danger-bg-hover: rgb(127 29 29 / 0.32);
+  --danger-border: rgb(248 113 113 / 0.35);
+  --shadow-sm: 0 1px 2px 0 rgb(2 6 23 / 0.45);
+  --shadow-md: 0 6px 12px rgb(2 6 23 / 0.35);
+  --shadow-lg: 0 10px 15px -3px rgb(2 6 23 / 0.45);
+  --skeleton-base: #1e293b;
+  --skeleton-highlight: #334155;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }

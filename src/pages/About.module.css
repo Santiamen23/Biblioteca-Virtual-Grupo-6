@@ -1,8 +1,8 @@
 .page {
   min-height: 100vh;
   padding: 2rem 1rem;
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--surface-subtle);
+  color: var(--text-primary);
 }
 
 .container {
@@ -16,20 +16,20 @@
 
 .card {
   padding: 1.5rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: #ffffff;
-  box-shadow: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .badge {
   display: inline-flex;
   width: fit-content;
   padding: 0.25rem 0.75rem;
-  border: 1px solid #bae6fd;
+  border: 1px solid var(--border-accent);
   border-radius: 9999px;
-  background: #f0f9ff;
-  color: #0369a1;
+  background: var(--surface-accent);
+  color: var(--brand-strong);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -40,13 +40,13 @@
   margin-top: 1rem;
   font-size: 1.875rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .description {
   max-width: 48rem;
   margin-top: 0.75rem;
-  color: #475569;
+  color: var(--text-soft);
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -54,13 +54,13 @@
 .subtitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-secondary);
 }
 
 .list {
   margin-top: 1rem;
   padding-left: 1.25rem;
-  color: #475569;
+  color: var(--text-soft);
   font-size: 0.875rem;
   line-height: 1.8;
 }
@@ -74,10 +74,10 @@
 
 .tags span {
   padding: 0.4rem 0.75rem;
-  border: 1px solid #bae6fd;
+  border: 1px solid var(--border-accent);
   border-radius: 9999px;
-  background: #f0f9ff;
-  color: #0369a1;
+  background: var(--surface-accent);
+  color: var(--brand-strong);
   font-size: 0.8125rem;
   font-weight: 500;
 }

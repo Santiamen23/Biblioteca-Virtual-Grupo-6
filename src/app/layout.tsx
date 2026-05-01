@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import Navbar from "@/components/NavBar";
 import "./globals.css";
 
@@ -26,10 +27,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="light"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`try {
+  const theme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+} catch {
+  document.documentElement.dataset.theme = "light";
+  document.documentElement.style.colorScheme = "light";
+}`}
+        </Script>
         <Navbar />
         {children}
       </body>

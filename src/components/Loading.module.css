@@ -5,16 +5,21 @@
 
 .card {
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .cover,
 .lineLarge,
 .lineMedium,
 .lineSmall {
-  background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 75%
+  );
   background-size: 200% 100%;
   animation: pulse 1.4s ease-in-out infinite;
 }
