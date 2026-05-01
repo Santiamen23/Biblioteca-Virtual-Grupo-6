@@ -24,7 +24,7 @@ export default function BookDetailCard({ book }: BookDetailCardProps) {
     publisher: "Desconocido",
   };
 
-  const isFavorite = checkIsFavorite(book.id);
+  const isBookFavorite = checkIsFavorite(book.id);
 
   return (
     <div className={styles.content}>
@@ -95,10 +95,10 @@ export default function BookDetailCard({ book }: BookDetailCardProps) {
           type="button"
           onClick={() => toggleFavorite(favoriteBook)}
           className={`${styles.favBtn} ${
-            isFavorite ? styles.favActive : styles.favInactive
+            isBookFavorite ? styles.favActive : styles.favInactive
           }`}
         >
-          {isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
+          {isBookFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
         </button>
       </div>
     </div>

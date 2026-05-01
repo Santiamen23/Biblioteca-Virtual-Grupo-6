@@ -10,7 +10,7 @@ import styles from "./BookCard.module.css";
 export default function BookCard({ book }: BookCardProps) {
   const { toggleFavorite, checkIsFavorite } = useFavorites();
   const workId = getBookWorkId(book.id);
-  const isFavorite = checkIsFavorite(workId);
+  const isBookFavorite = checkIsFavorite(workId);
 
   return (
     <article className={styles.card}>
@@ -40,7 +40,7 @@ export default function BookCard({ book }: BookCardProps) {
             onClick={() => toggleFavorite(book)}
             className={styles.favoriteButton}
           >
-            {isFavorite ? "Quitar" : "Agregar"}
+            {isBookFavorite ? "Quitar" : "Agregar"}
           </button>
         </div>
       </div>

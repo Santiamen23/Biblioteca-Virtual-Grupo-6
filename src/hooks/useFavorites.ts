@@ -3,12 +3,17 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Book } from "@/models/book";
 import { getBookWorkId } from "@/models/book";
-import { getFavorites, addFavorite, removeFavorite, isFavorite } from "@/utils/storage";
+import { getFavorites, addFavorite, removeFavorite } from "@/utils/storage";
 
 const FAVORITES_UPDATED_EVENT = "favorites-updated";
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<Book[]>(() => getFavorites());
+
+  const checkIsFavorite = useCallback((id: string) => {
+    const normalizedId = getBookWorkId(id);
+    return favorites.some((book) => book.id === normalizedId);
+  }, [favorites]);
 
   useEffect(() => {
     const syncFavorites = () => {
@@ -30,7 +35,7 @@ export function useFavorites() {
       id: getBookWorkId(book.id),
     };
 
-    if (isFavorite(normalizedBook.id)) {
+    if (checkIsFavorite(normalizedBook.id)) {
       removeFavorite(normalizedBook.id);
     } else {
       addFavorite(normalizedBook);
@@ -38,11 +43,7 @@ export function useFavorites() {
 
     setFavorites(getFavorites());
     window.dispatchEvent(new Event(FAVORITES_UPDATED_EVENT));
-  }, []);
-
-  const checkIsFavorite = useCallback((id: string) => {
-    return isFavorite(getBookWorkId(id));
-  }, []);
+  }, [checkIsFavorite]);
 
   return { favorites, toggleFavorite, checkIsFavorite };
 }
