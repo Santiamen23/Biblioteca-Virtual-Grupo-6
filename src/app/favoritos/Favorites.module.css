@@ -1,0 +1,54 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.count {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.emptyText {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.emptyLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #0284c7;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.emptyLink:hover {
+  background: #0369a1;
+}
